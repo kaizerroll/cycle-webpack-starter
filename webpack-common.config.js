@@ -1,7 +1,7 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-let name = 'Cycle!';
+let name = 'Cycle';
 
 let vendorModules = /(node_modules|bower_components)/;
 
