@@ -1,30 +1,13 @@
-import Rx from 'rx';
-import Cycle from '@cycle/core';
-import {makeDOMDriver, hJSX} from '@cycle/dom';
+import {run} from '@cycle/core';
+import {makeDOMDriver} from '@cycle/dom';
+import {makeHTTPDriver} from '@cycle/http';
+//import main from './hello-world';
+//import main from './counter';
+//import main from './httpRequest';
+import main from './bmi';
 
-function renderCheckbox(toggled) {
-  return (
-    <div>
-      <input type='checkbox'/> Toggle me
-      <p>{toggled ? 'ON' : 'OFF'}</p>
-    </div>
-  );
-}
-
-// updates app state
-function main(drivers) {
-  return {
-    DOM:
-      Rx.Observable
-        .just(false)
-        .map(renderCheckbox),
-  };
-}
-
-// the source for our app state
-const drivers = {
+// compose main with sources
+run(main, {
   DOM: makeDOMDriver('#app'),
-};
-
-// compose main with drivers
-Cycle.run(main, drivers);
+  HTTP: makeHTTPDriver(),
+});
